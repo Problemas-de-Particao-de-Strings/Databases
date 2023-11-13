@@ -1,7 +1,7 @@
 import pandas as pd
+import sys
 
-
-df = pd.read_csv('../Dados/FPT3-exact.csv')
+df = pd.read_csv(sys.argv[1])
 df.dropna(inplace=True)
 
 left = df['left'].str.strip('[]').str.split(',').str.join(' ')
@@ -16,7 +16,13 @@ for (l, r) in zip(left, right):
 def strlen(s: str) -> int:
     return len([int(si) for si in s.split()])
 
-for (l, r) in sorted(strs, key=lambda s: sum(strlen(si) for si in s)):
+def sorting(s: tuple[str, str]) -> tuple[int, int]:
+    s1, s2 = s
+    n1 = strlen(s1) + strlen(s2)
+    n2 = len(s1) + len(s2)
+    return n1, n2
+
+for (l, r) in sorted(strs, key=sorting):
     n = min(strlen(l), strlen(r))
     print(l)
     # print(' '.join('0' for _ in range(n + 1)))
