@@ -20,7 +20,7 @@ def sorting(s: tuple[str, str]) -> tuple[int, int]:
     s1, s2 = s
     n1 = strlen(s1) + strlen(s2)
     n2 = len(s1) + len(s2)
-    return n1, n2
+    return n2, n1
 
 for (l, r) in sorted(strs, key=sorting):
     n = min(strlen(l), strlen(r))
